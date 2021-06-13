@@ -38,12 +38,16 @@ function affine($char, $shiftArr,$a, $b){
 }
 
 function caesarEncryption($string, $dict, $shiftArr,  $a, $b){
+    $result = "";
     foreach (str_split($string) as $char){
         $newCharIndex = affine($char, $shiftArr, $a, $b);
-        echo $dict[$newCharIndex];
+        $result = $result.$dict[$newCharIndex];
     }
+    return $result;
 }
 
 //Tekst orginalny: VENI
 //Tekst zaszyfrowany: XYZK
-caesarEncryption("VENI", $dict, $shiftValues, $a, $b);
+$newline = "<br></br>";
+echo caesarEncryption("VENI", $dict, $shiftValues, $a, $b).$newline;
+echo caesarEncryption("VENI", $dict, $shiftValues, 2*$a, 2*$b).$newline;
