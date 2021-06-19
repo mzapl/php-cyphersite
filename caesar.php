@@ -32,22 +32,67 @@ $dict = array_flip($shiftValues);
 $a = 3;
 $b = 12;
 
+//E(x)=(ax+b) mod m
 function affine($char, $shiftArr,$a, $b){
     $x = ($shiftArr[$char] * $a + $b) % sizeof($shiftArr);
     return $x;
 }
 
+// D(x)=a^-1(x-b) mod m
+function affineDecrypt($char, $shiftArr,$a, $b){
+    $y = $shiftArr[$char];
+    $y2 = (21 *( $y - $b)) % 26;
+    return $y2;
+}
+
+///Trying to find out the way to loop through values infinitely
+function infiniteOffset($offset, $arr){
+    $len = sizeof($arr);
+    if($offset < 0){
+        return $len + $offset;
+    }
+
+    if($offset >= $len){
+        return $offset % $len;
+    }
+
+    return $offset;
+}
+
+
 function caesarEncryption($string, $dict, $shiftArr,  $a, $b){
     $result = "";
     foreach (str_split($string) as $char){
-        $newCharIndex = affine($char, $shiftArr, $a, $b);
-        $result = $result.$dict[$newCharIndex];
+        if ($char != " "){
+            $newCharIndex = affine($char, $shiftArr, $a, $b);
+            $result = $result.$dict[$newCharIndex];
+        }else{
+            $result = $result." ";
+        }
+
     }
     return $result;
 }
 
-//Tekst orginalny: VENI
-//Tekst zaszyfrowany: XYZK
-$newline = "<br></br>";
-echo caesarEncryption("VENI", $dict, $shiftValues, $a, $b).$newline;
-echo caesarEncryption("VENI", $dict, $shiftValues, 2*$a, 2*$b).$newline;
+
+function caesarDecryption($string, $dict, $shiftArr,  $a, $b)
+{
+    $result = "";
+    foreach (str_split($string) as $char) {
+        if ($char != " ") {
+            $newCharIndex = affineDecrypt($char, $shiftArr, $a, $b);
+            $result = $result . $dict[infiniteOffset($newCharIndex, $dict)];
+        } else {
+            $result = $result . " ";
+        }
+    }
+    return $result;
+}
+
+header('Content-type: text/plain');
+
+//Tekst oryginalny: AFFINE CIPHER
+//Tekst zaszyfrowany: IHHWVC SWFRCP
+//a = 5, b = 8
+echo caesarEncryption("AFFINE CIPHER", $dict, $shiftValues, 5, 8)." ";
+echo caesarDecryption("IHHWVC SWFRCP", $dict, $shiftValues, 5, 8)." ";
