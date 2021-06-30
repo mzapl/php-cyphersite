@@ -1,5 +1,24 @@
-document.write($('form select[name=cipher]')
+function resetsnippet(){
+    $('.cipher').on('change', function() {
+        var cipher = $('.cipher').val();
+        console.warn(this.value)
+        if(cipher == "affine"){
+            $(".optional-affine").css('display', 'block')
+            $(".optional-vingenere").css('display', 'none')
+        }
 
-// $('form select[name=cipher]')){
-//     document.write("1234");
-// });
+        else if (cipher == "vingenere"){
+            $(".optional-affine").css('display', 'none')
+            $(".optional-vingenere").css('display', 'block')
+        }
+
+        else{
+            $(".optional-affine").css('display', 'none')
+            $(".optional-vingenere").css('display', 'none')
+        }
+
+    });
+
+
+
+}

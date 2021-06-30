@@ -10,25 +10,25 @@
 <div id="top">
   <span class="instruct">Choose your options:</span>
   <form name="selection">
-    <select name="cipher" id="cipher" onchange="resetsnippet()">
+    <label for="cipher"></label><select class="cipher" name="cipher" id="cipher" onchange="resetsnippet()">
       <option value="None">Choose one</option>
       <option value="Morse">Morse</option>
-      <option value="Affine">Affine</option>
-      <option value="Vigenère">Vigenère</option>
+      <option value="affine">Affine</option>
+      <option value="vingenere">Vigenère</option>
     </select>
 
-    <select name="function" id="func">
+    <label for="func"></label><select name="function" id="func">
       <option value="encode">encode</option>
       <option value="decode">decode</option>
     </select>
   </form>
 
-  <form name="optional-affine" style='display: none'>
+  <form class="optional-affine" style='display: none'>
     <input type="number" required placeholder="insert a if affine is selected">
     <input type="number" required placeholder="insert b if affine is selected">
   </form>
 
-  <form name="optional-vingenere" style='display: none'>
+  <form class="optional-vingenere" style='display: none'>
     <input type="text" required placeholder="insert key here if vingenere is selected">
   </form>
 </div>
