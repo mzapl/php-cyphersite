@@ -5,38 +5,40 @@
     <title>morse-code project</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/hide.js"></script>
-    <?= include('main.php') ?>
 </head>
 <body>
 <div id="top">
   <span class="instruct">Choose your options:</span>
-  <form name="selection">
-    <label for="cipher"></label><select class="cipher" name="cipher" id="cipher" onchange="resetsnippet()">
+  <form name="selection" action="main.php" method="post">
+    <select class="cipher" name="cipher" id="cipher" onchange="resetsnippet()">
       <option value="None">Choose one</option>
       <option value="Morse">Morse</option>
       <option value="affine">Affine</option>
       <option value="vingenere">Vigenère</option>
     </select>
 
-    <label for="func"></label><select name="function" id="func">
+<!--    <label for="func"></label>-->
+    <select name="function" id="func">
       <option value="encode">encode</option>
       <option value="decode">decode</option>
     </select>
-  </form>
 
-  <form class="optional-affine" style='display: none'>
-    <input type="number" required placeholder="insert a if affine is selected">
-    <input type="number" required placeholder="insert b if affine is selected">
-  </form>
 
-  <form class="optional-vingenere" style='display: none'>
-    <input type="text" required placeholder="insert key here if vingenere is selected">
+
+
+    <input name="optional-a" style='display: none' type="number" min="0" value="0" placeholder="insert a if affine is selected">
+    <input name="optional-b" style='display: none' type="number" min="0" value="0" placeholder="insert b if affine is selected">
+
+    <input name="optional-key" style='display: none' type="text" placeholder="insert key here if vingenere is selected">
+
+    <label for="usertext">tutaj będzie wynik:</label>
+    <textarea id="usertext" name="usertext" contenteditable="true"></textarea>
+
+    <input type="submit">
+
   </form>
 </div>
 
-<div id="input forms">
-  <textarea id="usertext" contenteditable="true"></textarea>
-</div>
 
 <div id="footer"></div>
 
