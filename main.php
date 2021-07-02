@@ -47,4 +47,6 @@ function data(){
 $data = data();
 $data['usertext'] = strtoupper($data['usertext']);
 $selection = selectCipher($data);
-echo $selection($data);
+//echo $selection($data);
+require "index.html";
+echo "<script src='js/result.js'></script>";
