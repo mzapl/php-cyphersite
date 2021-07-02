@@ -1,36 +1,39 @@
 <?php
-$shiftValues = array(
-    'A' => 0,
-    'B' => 1,
-    'C' => 2,
-    'D' => 3,
-    'E' => 4,
-    'F' => 5,
-    'G' => 6,
-    'H' => 7,
-    'I' => 8,
-    'J' => 9,
-    'K' => 10,
-    'L' => 11,
-    'M' => 12,
-    'N' => 13,
-    'O' => 14,
-    'P' => 15,
-    'Q' => 16,
-    'R' => 17,
-    'S' => 18,
-    'T' => 19,
-    'U' => 20,
-    'V' => 21,
-    'W' => 22,
-    'X' => 23,
-    'Y' => 24,
-    'Z' => 25,
-);
+function initializeDicts(){
+    $shiftValues = array(
+        'A' => 0,
+        'B' => 1,
+        'C' => 2,
+        'D' => 3,
+        'E' => 4,
+        'F' => 5,
+        'G' => 6,
+        'H' => 7,
+        'I' => 8,
+        'J' => 9,
+        'K' => 10,
+        'L' => 11,
+        'M' => 12,
+        'N' => 13,
+        'O' => 14,
+        'P' => 15,
+        'Q' => 16,
+        'R' => 17,
+        'S' => 18,
+        'T' => 19,
+        'U' => 20,
+        'V' => 21,
+        'W' => 22,
+        'X' => 23,
+        'Y' => 24,
+        'Z' => 25,
+    );
 
-$dict = array_flip($shiftValues);
-$a = 3;
-$b = 12;
+    $dict = array_flip($shiftValues);
+
+    return array('shiftValues' => $shiftValues, 'dict' => $dict);
+}
+
 
 //E(x)=(ax+b) mod m
 function affine($char, $shiftArr,$a, $b){
@@ -60,7 +63,14 @@ function infiniteOffset($offset, $arr){
 }
 
 
-function caesarEncryption($string, $dict, $shiftArr,  $a, $b){
+function caesarEncryption($data){
+    $dicts = initializeDicts();
+    $dict = $dicts['dict'];
+    $shiftArr = $dicts['shiftValues'];
+    $a = $data['optional-a'];
+    $b = $data['optional-b'];
+    $string = $data['usertext'];
+
     $result = "";
     foreach (str_split($string) as $char){
         if ($char != " "){
@@ -89,10 +99,13 @@ function caesarDecryption($string, $dict, $shiftArr,  $a, $b)
     return $result;
 }
 
-header('Content-type: text/plain');
+//$a = 3;
+//$b = 12;
+
+//header('Content-type: text/plain');
 
 //Tekst oryginalny: AFFINE CIPHER
 //Tekst zaszyfrowany: IHHWVC SWFRCP
-//a = 5, b = 8
-echo caesarEncryption("AFFINE CIPHER", $dict, $shiftValues, 5, 8)." ";
-echo caesarDecryption("IHHWVC SWFRCP", $dict, $shiftValues, 5, 8)." ";
+////a = 5, b = 8
+//echo caesarEncryption("AFFINE CIPHER", $dict, $shiftValues, 5, 8)." ";
+//echo caesarDecryption("IHHWVC SWFRCP", $dict, $shiftValues, 5, 8)." ";

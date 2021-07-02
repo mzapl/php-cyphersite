@@ -10,14 +10,14 @@
 <div id="top">
   <span class="instruct">Choose your options:</span>
   <form name="selection" action="main.php" method="post">
-    <select class="cipher" name="cipher" id="cipher" onchange="resetsnippet()">
-      <option value="None">Choose one</option>
-      <option value="Morse">Morse</option>
+    <select class="cipher" name="cipher" id="cipher" required onchange="resetsnippet()">
+      <option value="">Choose one</option>
+      <option value="morse">Morse</option>
       <option value="affine">Affine</option>
       <option value="vingenere">Vigenère</option>
     </select>
 
-<!--    <label for="func"></label>-->
+
     <select name="function" id="func">
       <option value="encode">encode</option>
       <option value="decode">decode</option>
