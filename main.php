@@ -35,6 +35,16 @@ function data(){
     return $data;
 }
 
+function normalize($string){
+    $polishSigns = array('Ą'=>'A','Ć'=>'C','Ę'=>'E','Ł'=>'L', 'Ń'=>'N', 'Ó'=>'O', 'Ś'=>'S', 'Ż'=>'Z','Ź'=>'Z');
+    foreach (str_split($string) as $char){
+        if(array_key_exists($char, $polishSigns)){
+            str_replace($char, $polishSigns[$char], $string);
+        }
+    }
+    return $string;
+}
+
 function debug(){
     phpinfo();
     $func = $_GET;
@@ -52,10 +62,15 @@ function debug(){
 }
 
 $data = data();
-$data['usertext'] = trim(strtoupper($data['usertext']));
+$data['usertext']  = normalize(trim(strtoupper($data['usertext'])));
+//$data['usertext'] = trim(strtoupper($data['usertext']));
+
 $selection = selectCipher($data);
+$result = $selection($data);
 
 require "index.html";
-echo "<label for='resulttext'>Tutaj będzie wynik:</label>";
-echo "<textarea id='resulttext' name='resulttext' readonly>".trim($selection($data))."</textarea>";
+echo "<label for='resulttext'>Wynik:</label>";
+echo "<div class='span6'>";
+echo "<textarea id='resulttext' name='resulttext' class='form-control'  rows='6' readonly>".trim($result)."</textarea>";
+echo "</div></form></div>";
 echo "<script src='js/result.js'></script>";
