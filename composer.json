@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/kodowanie-projekt",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Maciek",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}
