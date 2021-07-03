@@ -38,7 +38,7 @@ function initialize(){
         '7' => "---..",
         '8' => "----.",
         '9' => "-----",
-        ' ' => "____",
+        ' ' => "____"
     );
 
     return $dict;
@@ -50,7 +50,12 @@ function morseEncrypt($data){
     $result = "";
 
     foreach (str_split($string) as $char){
-        $result = $result."${dict[$char]}";
+        if(array_key_exists($char, $dict)){
+            $result = $result."${dict[$char]}";
+            $result = $result." ";
+        }
+        else
+            $result = $result.$char;
     }
     return $result;
 }
@@ -63,7 +68,11 @@ function morseDecrypt($data){
 
     foreach (preg_split("/\s\s\s\s+/", $cypher) as $word){
         foreach (preg_split("/[\s,]+/", $word) as $char){
-            $result = $result."${cypherDict[$char]}";
+            if(array_key_exists($char, $cypherDict)){
+                $result = $result."${cypherDict[$char]}";
+            }
+            else
+                $result = $result.$char;
         }
         $result = $result." ";
     }

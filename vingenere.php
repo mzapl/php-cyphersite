@@ -41,10 +41,14 @@ function vingenereLoop($data){
     }
 
     foreach (range(0, strlen($message)-1) as $i){
-        $index = $func($dictionary[$message[$i]], $dictionary[$key[$i]]);
-        $result = $result.array_flip($dictionary)[$index];
+        if(array_key_exists($key[$i], $dictionary) && array_key_exists($message[$i], $dictionary)){
+            $index = $func($dictionary[$message[$i]], $dictionary[$key[$i]]);
+            $result = $result.array_flip($dictionary)[$index];
+        }else
+            $result = $result.$message[$i];
+
     }
-    echo $result;
+    return $result;
 }
 
 function vingenereEncryption($litera, $klucz){

@@ -26,11 +26,20 @@ function selectFunction($function, $encrypt, $decrypt){
 
 
 function data(){
-//    phpinfo();
+    $data = $_GET;
+    if(count($_GET) == 0){
+        $data = $_POST;
+    }
+
+
+    return $data;
+}
+
+function debug(){
+    phpinfo();
     $func = $_GET;
     if(count($_GET) == 0){
         $func = $_POST;
-        $data = $_POST;
     }
 
     $keys = array_keys($func);
@@ -40,13 +49,13 @@ function data(){
     echo "<br/>";
     echo $_SERVER['REQUEST_METHOD'] . "<br/>";
     echo $_SERVER['REQUEST_URI'];
-
-    return $data;
 }
 
 $data = data();
-$data['usertext'] = strtoupper($data['usertext']);
+$data['usertext'] = trim(strtoupper($data['usertext']));
 $selection = selectCipher($data);
-//echo $selection($data);
+
 require "index.html";
+echo "<label for='resulttext'>Tutaj będzie wynik:</label>";
+echo "<textarea id='resulttext' name='resulttext' readonly>".trim($selection($data))."</textarea>";
 echo "<script src='js/result.js'></script>";

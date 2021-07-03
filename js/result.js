@@ -1,2 +1,2 @@
-result = "ABCDFEF";
+result = "";
 document.getElementById("usertext").value = result;

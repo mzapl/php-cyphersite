@@ -85,8 +85,15 @@ function caesarEncryption($data){
 }
 
 
-function caesarDecryption($string, $dict, $shiftArr,  $a, $b)
+function caesarDecryption($data)
 {
+    $dicts = initializeDicts();
+    $dict = $dicts['dict'];
+    $shiftArr = $dicts['shiftValues'];
+    $a = $data['optional-a'];
+    $b = $data['optional-b'];
+    $string = $data['usertext'];
+
     $result = "";
     foreach (str_split($string) as $char) {
         if ($char != " ") {
