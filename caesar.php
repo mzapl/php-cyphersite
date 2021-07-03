@@ -44,7 +44,7 @@ function affine($char, $shiftArr,$a, $b){
 // D(x)=a^-1(x-b) mod m
 function affineDecrypt($char, $shiftArr,$a, $b){
     $y = $shiftArr[$char];
-    $y2 = (21 *( $y - $b)) % 26;
+    $y2 = (21 + ( $y - $b)) % 26;
     return $y2;
 }
 
