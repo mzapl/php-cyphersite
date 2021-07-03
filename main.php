@@ -38,10 +38,11 @@ function data(){
 function normalize($string){
     $polishSigns = array('Ą'=>'A','Ć'=>'C','Ę'=>'E','Ł'=>'L', 'Ń'=>'N', 'Ó'=>'O', 'Ś'=>'S', 'Ż'=>'Z','Ź'=>'Z');
     foreach (str_split($string) as $char){
-        if(array_key_exists($char, $polishSigns)){
-            str_replace($char, $polishSigns[$char], $string);
+        if(array_key_exists($char, array_keys($polishSigns))){
+            str_replace(array_keys($polishSigns), array_values($polishSigns), $string);
         }
     }
+
     return $string;
 }
 
@@ -63,7 +64,6 @@ function debug(){
 
 $data = data();
 $data['usertext']  = normalize(trim(strtoupper($data['usertext'])));
-//$data['usertext'] = trim(strtoupper($data['usertext']));
 
 $selection = selectCipher($data);
 $result = $selection($data);
